@@ -410,7 +410,7 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   function start() { if (!reduce && !running) { running = true; requestAnimationFrame(loop); } }
 
   resize();
-  if (reduce) still(); else start();
+  if (reduce) still(); else { for (let i = 0; i < 40; i++) step(); start(); }
 
   // Mobilnettlesere endrer høyden når adresselinja skjules; tegn bare på nytt når bredden endres.
   let lastW = innerWidth;
