@@ -177,7 +177,7 @@ p:last-child { margin-bottom: 0; }
 
 .areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 8px; }
 .area { background: var(--surface); padding: 22px 22px 24px; display: grid; gap: 8px; align-content: start; }
-.projects { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+.projects { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
 .projects .area { padding: 24px 24px 22px; gap: 10px; }
 .project-link { text-decoration: none; color: inherit; }
 .project-link .arr { display: inline-block; font-family: var(--body); transition: transform .2s ease; }
@@ -199,14 +199,11 @@ p:last-child { margin-bottom: 0; }
 .org { color: var(--muted); font-size: 0.95rem; margin: 2px 0 0; }
 .note { font-size: 0.95rem; margin: 8px 0 0; max-width: 56ch; }
 
-.skillgrid { display: grid; gap: 22px; }
-.sk { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .chip {
   font: 500 0.88rem/1 var(--mono); padding: 10px 14px; border-radius: 8px;
   border: 1px solid var(--line); background: var(--surface);
 }
-.chip .lvl { color: var(--muted); font-weight: 400; }
 .chip {
   position: relative; cursor: default;
   transition: transform .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
@@ -356,8 +353,8 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   <div class="hero-inner">
     <ul class="eyebrow">
       <li data-i18n="eb1">Fysikk og matematikk, NTNU</li>
-      <li data-i18n="eb2">Utveksling i Busan høsten&nbsp;2026</li>
-      <li data-i18n="eb3">Søker internship sommeren&nbsp;2027</li>
+      <li data-i18n="eb2">Utveksling PNU i Busan høsten&nbsp;2026</li>
+      <li data-i18n="eb3">Ser etter deltidsjobb og internship sommeren&nbsp;2027</li>
     </ul>
     <h1>David<br><span class="last">Popovic</span></h1>
     <p class="lede" data-i18n="lede">Jeg studerer fysikk og matematikk ved NTNU og er interessert i <em>strategi</em>, <em>AI</em> og&nbsp;<em>analyse</em>.</p>
@@ -377,10 +374,9 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <p class="label" data-i18n="aboutL">Om meg</p>
     <div>
       <h2 id="om-h" data-i18n="aboutH">Fra datateknologi til fysmat</h2>
-      <p data-i18n="about1">Jeg går tredje året på anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
-      <p data-i18n="about2">Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
-      <p data-i18n="about3">Jeg er mest glad i den delen av matematikken som kan brukes til å ta beslutninger, som forventningsverdi og risiko. Drømmen er å bruke data og statistikk til å hjelpe bedrifter med å ta bedre valg om pris, markedsføring og salg.</p>
-      <p data-i18n="about4">Jeg liker også å jobbe med folk. Som mentor og læringsassistent har jeg fått mye trening i å forklare vanskelige ting på en enkel måte.</p>
+      <p data-i18n="about1">Jeg studerer fysikk og matematikk ved NTNU. Jeg begynte i utgangspunktet på datateknologi fordi jeg var fascinert av AI, men etter første år skjønte jeg at det jeg likte best var matematikk og kvantitativ analyse. Statistikk har blitt en spesiell interesse for meg.</p>
+      <p data-i18n="about2">Jeg er veldig glad i matte, spesielt den delen av matte som kan brukes til å ta beslutninger. Jeg er fascinert av hvordan konsepter som forventningsverdi og høyere ordens momenter kan brukes i beslutningstaking. Drømmejobben min er å bruke dette fagfeltet til å skape verdi ved å ta bedre beslutninger. Denne tankegangen er konstant med meg i hverdagen.</p>
+      <p data-i18n="about3">Nå lærer jeg AI på egen hånd ved siden av studiet, for å jobbe mer effektivt med de oppgavene jeg har foran meg. Jeg bruker aktivt en AI-assistert agentic workflow med Obsidian for å ha oversikt over prosjektene mine og få mest mulig ut av AI-bruken – inspirert av Andrej Karpathy sin LLM-wiki-idé.</p>
     </div>
   </section>
 
@@ -400,6 +396,11 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   <section id="prosjekter" aria-labelledby="pro-h">
     <p class="label" id="pro-h" data-i18n="projL">Prosjekter</p>
     <div class="areas projects">
+      <div class="area">
+        <h3 data-i18n="p0h">Pokerbot</h3>
+        <p data-i18n="p0p">Lages i Python sammen med Felix. Min del av prosjektet er strategien og simulatoren: starthender vurderes med Chen-formelen, og vinnersjansen fra Monte Carlo-simulering sammenlignes med pot odds.</p>
+        <ul class="tags"><li>Python</li><li>Monte Carlo</li><li>Pot odds</li></ul>
+      </div>
       <div class="area">
         <h3 data-i18n="p1h">AI-assistert arbeidsflyt i Obsidian</h3>
         <p data-i18n="p1p">Et system der en AI-assistent holder orden på prosjektene og notatene mine.</p>
@@ -471,21 +472,13 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
         <li class="chip" tabindex="0" data-tip="TMA4240 · NTNU" data-i18n="c4">Statistikk</li>
         <li class="chip" tabindex="0" data-tip="TMA4140 · NTNU" data-i18n="c5">Diskret matematikk</li>
         <li class="chip" tabindex="0" data-tip="FY1020 · NTNU" data-i18n="c6">Mekanikk</li>
+        <li class="chip" tabindex="0" data-tip="TFY4107 · NTNU" data-i18n="c9">Fysikk</li>
         <li class="chip" tabindex="0" data-tip="TFY4030 · NTNU" data-i18n="c7">Elektrisitet og magnetisme</li>
         <li class="chip" tabindex="0" data-tip="TDT4100 · NTNU" data-i18n="c8">Objektorientert programmering</li>
       </ul>
-      <p class="muted foot-note" data-i18n="ects">90 studiepoeng fullført ved NTNU.</p>
     </div>
   </section>
 
-  <section id="ferdigheter" aria-labelledby="fer-h">
-    <p class="label" id="fer-h" data-i18n="toolsL">Verktøy og språk</p>
-    <div class="skillgrid">
-      <div><p class="sk" data-i18n="skP">Programmering</p><ul class="chips"><li class="chip" tabindex="0" data-tip="Brukt i studiet ved NTNU" data-i18n-tip="tipPy">Python</li><li class="chip" tabindex="0" data-tip="TDT4100 · objektorientert" data-i18n-tip="tipJava">Java</li></ul></div>
-      <div><p class="sk" data-i18n="skA">Analyse</p><ul class="chips"><li class="chip" tabindex="0">Excel</li><li class="chip" tabindex="0">PowerPoint</li></ul></div>
-      <div><p class="sk" data-i18n="skL">Språk</p><ul class="chips"><li class="chip" tabindex="0" data-i18n="lNo">Norsk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0" data-i18n="lSr">Serbisk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0" data-i18n="lEn">Engelsk <span class="lvl">· C2</span></li></ul></div>
-    </div>
-  </section>
 
   <section id="kontakt" aria-labelledby="kon-h">
     <p class="label" data-i18n="conL">Kontakt</p>
@@ -627,10 +620,9 @@ const I18N = {
     btnContact: 'Contact',
     aboutL: 'About',
     aboutH: 'From computer science to physics and math',
-    about1: 'I’m a third-year student in Applied Physics and Mathematics at NTNU. I started out in Computer Science in 2024, but switched after a year because I wanted more math and physics. This fall I’m on exchange at Pusan National University in South Korea.',
-    about2: 'Alongside my studies I work as a math and physics mentor, and last year I was a learning assistant in Experts in Teamwork at NTNU. In high school I was student council president at Hamar katedralskole and sat on the Hamar municipal youth council.',
-    about3: 'The part of mathematics I like best is the part you can use to make decisions, like expected value and risk. My goal is to use data and statistics to help companies make better calls on pricing, marketing and sales.',
-    about4: 'I also enjoy working with people. As a mentor and learning assistant, I’ve had a lot of practice explaining difficult ideas in a simple way.',
+    about1: 'I study Applied Physics and Mathematics at NTNU. I originally started in Computer Science because I was fascinated by AI, but after my first year I realized that what I enjoyed most was mathematics and quantitative analysis. Statistics has become a particular interest of mine.',
+    about2: 'I love mathematics, especially the kind you can use to make decisions. I’m fascinated by how concepts like expected value and higher-order moments can be applied to decision-making. My dream job is to use this field to create value through better decisions. This way of thinking is always with me in everyday life.',
+    about3: 'Now I’m learning AI on my own alongside my studies, to work more efficiently on whatever task I have at hand. I actively use an AI-assisted agentic workflow in Obsidian to keep track of my projects and get the most out of AI, inspired by Andrej Karpathy’s LLM wiki idea.',
     lookL: 'What I’m looking for',
     lookH: 'Summer internship 2027',
     lookP: 'I’m looking for an internship where I get to work on real problems in these areas:',
@@ -638,6 +630,8 @@ const I18N = {
     a2: '<h3>Data and AI</h3><p>Both what AI can be used for and the mathematics behind how it works.</p>',
     a3: '<h3>Analytics</h3><p>Digging into the numbers: profitability analysis and modeling in Excel and Python.</p>',
     projL: 'Projects',
+    p0h: 'Poker bot',
+    p0p: 'Built in Python together with Felix. My part of the project is the strategy and the simulator: starting hands are scored with the Chen formula, and the win probability from Monte Carlo simulation is weighed against the pot odds.',
     p1h: 'AI-assisted workflow in Obsidian',
     p1p: 'A system where an AI assistant keeps my projects and notes organized.',
     p2h: 'This website <span class="arr" aria-hidden="true">↗</span>',
@@ -668,15 +662,7 @@ const I18N = {
     en4: 'Advanced mathematics (R1 and R2), physics, chemistry and biology.',
     coursesL: 'Selected courses',
     c1: 'Linear algebra', c2: 'Calculus', c3: 'Multivariable calculus and vector analysis', c4: 'Statistics',
-    c5: 'Discrete mathematics', c6: 'Mechanics', c7: 'Electricity and magnetism', c8: 'Object-oriented programming',
-    ects: '90 ECTS credits completed at NTNU.',
-    toolsL: 'Tools and languages',
-    skP: 'Programming', skA: 'Analytics', skL: 'Languages',
-    lNo: 'Norwegian <span class="lvl">· native</span>',
-    lSr: 'Serbian <span class="lvl">· native</span>',
-    lEn: 'English <span class="lvl">· C2</span>',
-    tipPy: 'Used in my studies at NTNU',
-    tipJava: 'TDT4100 · object-oriented',
+    c5: 'Discrete mathematics', c6: 'Mechanics', c7: 'Electricity and magnetism', c8: 'Object-oriented programming', c9: 'Physics',
     conL: 'Contact',
     conH: 'Get in touch<span class="brace" aria-hidden="true">{</span>',
     conP: 'Have a project or a question? Send me a message.',
