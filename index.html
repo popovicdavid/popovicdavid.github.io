@@ -1,55 +1,81 @@
 <!doctype html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="David Popovic – student i fysikk og matematikk ved NTNU, interessert i strategi, AI og analyse.">
 <title>David Popovic</title>
+<meta name="description" content="Student i anvendt fysikk og matematikk ved NTNU. Interessert i strategi, AI og analyse.">
+<meta name="author" content="David Popovic">
+<link rel="canonical" href="https://popovicdavid.github.io/">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="David Popovic">
+<meta property="og:title" content="David Popovic">
+<meta property="og:description" content="Student i anvendt fysikk og matematikk ved NTNU. Interessert i strategi, AI og analyse.">
+<meta property="og:url" content="https://popovicdavid.github.io/">
+<meta property="og:image" content="https://popovicdavid.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="David Popovic – fysikk og matematikk, NTNU">
+<meta property="og:locale" content="nb_NO">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a live vector field as the hero (the subject's own world: applied math),
-   then a narrow single column of facts, with a mono "margin note" column on wide screens.
-   Particle colors follow the viridis colormap. */
 :root {
   --bg: #0b0f1a;
   --surface: #121829;
   --fg: #e9ecf3;
   --muted: #8f97ad;
   --line: #232b40;
-  --accent: #fde725;      /* viridis end */
-  --accent-2: #35b779;    /* viridis mid */
+  --accent: #fde725;
+  --accent-2: #35b779;
   --ink-on-accent: #0b0f1a;
   --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gutter: clamp(16px, 4vw, 48px);
   color-scheme: dark;
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
+  :root {
     --bg: #f6f7fb; --surface: #ffffff; --fg: #12172a; --muted: #5b637a; --line: #dfe3ee;
     --accent: #3b2a8a; --accent-2: #1f7d6c; --ink-on-accent: #ffffff; color-scheme: light;
   }
 }
-:root[data-theme="light"] {
-  --bg: #f6f7fb; --surface: #ffffff; --fg: #12172a; --muted: #5b637a; --line: #dfe3ee;
-  --accent: #3b2a8a; --accent-2: #1f7d6c; --ink-on-accent: #ffffff; color-scheme: light;
-}
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
+  margin: 0;
   background: var(--bg); color: var(--fg);
   font: 400 1.0625rem/1.65 var(--body);
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
 }
-a { color: inherit; }
+::selection { background: var(--accent); color: var(--ink-on-accent); }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.skip {
+  position: absolute; left: var(--gutter); top: -100px; z-index: 10;
+  background: var(--accent); color: var(--ink-on-accent); padding: 10px 16px; border-radius: 8px;
+  font: 500 0.9rem/1 var(--body); text-decoration: none;
+}
+.skip:focus { top: 16px; }
 
-/* ---------- hero ---------- */
+/* Hero */
 .hero {
   position: relative;
-  min-height: clamp(520px, 82vh, 760px);
+  min-height: clamp(520px, 82svh, 760px);
   display: grid; align-items: end;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
@@ -62,94 +88,103 @@ a { color: inherit; }
 .hero-inner {
   position: relative; z-index: 1;
   width: 100%; max-width: 1120px; margin: 0 auto;
-  padding: 0 clamp(16px, 4vw, 48px) clamp(32px, 6vw, 64px);
+  padding: 0 var(--gutter) clamp(32px, 6vw, 64px);
   display: grid; gap: 22px;
 }
 .eyebrow {
   font: 500 0.78rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px;
+  color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none;
 }
-.eyebrow span::before { content: "● "; color: var(--accent-2); }
+.eyebrow li { display: flex; align-items: center; gap: 8px; }
+.eyebrow li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); flex: none; }
 h1 {
   font: 800 clamp(3.4rem, 13vw, 9.5rem)/0.86 var(--display);
-  letter-spacing: -0.045em; margin: 0; text-wrap: balance;
+  letter-spacing: -0.045em; margin: 0 0 0 -0.04em; text-wrap: balance;
 }
 h1 .last { color: var(--accent); }
 .lede {
-  font-size: clamp(1.1rem, 2.2vw, 1.4rem); line-height: 1.45; max-width: 34ch; margin: 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem); line-height: 1.45; max-width: 36ch; margin: 0; text-wrap: pretty;
 }
 .lede em { font-style: normal; color: var(--accent); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .btn {
+  display: inline-flex; align-items: center; gap: 8px;
   font: 500 0.95rem/1 var(--body); text-decoration: none;
   padding: 13px 20px; border-radius: 999px; border: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 70%, transparent);
-  backdrop-filter: blur(6px);
-  transition: transform .15s ease, border-color .15s ease;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
 }
 .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+.btn:active { transform: translateY(0); }
 .btn.primary { background: var(--accent); color: var(--ink-on-accent); border-color: var(--accent); }
+.btn svg { width: 16px; height: 16px; flex: none; }
 .eq {
-  position: absolute; z-index: 1; top: clamp(16px, 3vw, 28px); right: clamp(16px, 4vw, 48px);
+  position: absolute; z-index: 1; top: clamp(16px, 3vw, 28px); right: var(--gutter);
   font: 400 0.75rem/1.6 var(--mono); color: var(--muted); text-align: right;
   background: color-mix(in srgb, var(--bg) 60%, transparent); padding: 8px 12px; border-radius: 8px;
+  font-variant-numeric: tabular-nums;
 }
 .eq b { color: var(--fg); font-weight: 500; }
+@media (hover: none) { .eq .hint { display: none; } }
 
-/* ---------- body ---------- */
+/* Innhold */
 main {
   max-width: 1120px; margin: 0 auto;
-  padding-inline: clamp(16px, 4vw, 48px); padding-block: clamp(48px, 8vw, 96px);
+  padding-inline: var(--gutter); padding-block: clamp(48px, 8vw, 96px);
   display: grid; gap: clamp(64px, 9vw, 112px);
 }
-section { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px 48px; }
+section { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px 48px; scroll-margin-top: 32px; }
 .label {
   font: 500 0.78rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--muted); padding-top: 0.55em;
+  color: var(--muted); padding-top: 0.55em; margin: 0;
 }
 h2 {
   font: 700 clamp(1.8rem, 4vw, 2.8rem)/1.05 var(--display); letter-spacing: -0.03em;
   margin: 0 0 18px; text-wrap: balance; max-width: 22ch;
 }
-p { margin: 0 0 1em; max-width: 62ch; }
+p { margin: 0 0 1em; max-width: 62ch; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
 .muted { color: var(--muted); }
 
-/* interests: three areas, ranked */
 .areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 8px; }
 .area { background: var(--surface); padding: 22px 22px 24px; display: grid; gap: 8px; align-content: start; }
-.area .rank { font: 500 0.75rem/1 var(--mono); color: var(--accent-2); letter-spacing: 0.06em; }
+.area .rank { font: 500 0.72rem/1.2 var(--mono); color: var(--accent-2); letter-spacing: 0.08em; text-transform: uppercase; }
 .area h3 { font: 700 1.35rem/1.1 var(--display); margin: 0; letter-spacing: -0.02em; }
 .area p { font-size: 0.95rem; color: var(--muted); margin: 0; }
 
-/* timeline */
 .timeline { list-style: none; margin: 0; padding: 0; display: grid; }
 .timeline li {
-  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 24px;
+  display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 4px 24px;
   padding: 20px 0; border-top: 1px solid var(--line);
 }
 .timeline li:last-child { border-bottom: 1px solid var(--line); }
-.when { font: 400 0.85rem/1.5 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.2em; }
+.when { font: 400 0.85rem/1.5 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.2em; white-space: nowrap; }
 .when .now { color: var(--accent); }
 .role { font: 700 1.2rem/1.25 var(--display); letter-spacing: -0.01em; margin: 0; }
 .org { color: var(--muted); font-size: 0.95rem; margin: 2px 0 0; }
 .note { font-size: 0.95rem; margin: 8px 0 0; max-width: 56ch; }
 
-/* skills */
-.skillgrid { display: grid; gap: 20px; }
-.sk { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
-.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.skillgrid { display: grid; gap: 22px; }
+.sk { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .chip {
-  font: 500 0.9rem/1 var(--mono); padding: 10px 14px; border-radius: 8px;
+  font: 500 0.88rem/1 var(--mono); padding: 10px 14px; border-radius: 8px;
   border: 1px solid var(--line); background: var(--surface);
 }
+.chip .lvl { color: var(--muted); font-weight: 400; }
+.foot-note { margin-top: 14px; }
 
 footer {
   max-width: 1120px; margin: 0 auto;
-  padding-inline: clamp(16px, 4vw, 48px); padding-block: 32px 48px;
+  padding-inline: var(--gutter); padding-block: 32px max(48px, env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--line);
-  display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between;
-  font: 400 0.85rem/1.5 var(--mono); color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center;
+  font: 400 0.82rem/1.5 var(--mono); color: var(--muted);
 }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--fg); text-decoration: underline; }
 
 @media (max-width: 820px) {
   section { grid-template-columns: minmax(0, 1fr); }
@@ -158,173 +193,196 @@ footer {
   .timeline li { grid-template-columns: minmax(0, 1fr); }
   .eq { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}
+@media print {
+  :root { --bg: #fff; --surface: #fff; --fg: #000; --muted: #444; --line: #ccc; --accent: #000; --accent-2: #000; }
+  .hero { min-height: 0; border: 0; }
+  #field, .eq, .actions, .hero::after, .skip { display: none !important; }
+  .hero-inner { padding-top: 24px; }
+  h1 { font-size: 48pt; }
+  main { padding-block: 24px; gap: 28px; }
+  section { break-inside: avoid; }
+  footer nav a::after { content: " (" attr(href) ")"; }
+}
 </style>
-<style>body{margin:0}</style>
 </head>
 <body>
+<a class="skip" href="#innhold">Hopp til innholdet</a>
 
 <header class="hero">
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="eq" aria-hidden="true">
-    <b>ẋ</b> = sin(y/k + t) + ½ cos(x/2k)<br>
-    <b>ẏ</b> = cos(x/k − t) − ½ sin(y/2k)<br>
-    <span>flytt musa → virvel</span>
+    <b>ẋ</b> = sin(y/k + t) + ½&#8202;cos(x/2k)<br>
+    <b>ẏ</b> = cos(x/k − t) − ½&#8202;sin(y/2k)<br>
+    <span class="hint">flytt musa for å lage en virvel</span>
   </div>
   <div class="hero-inner">
-    <div class="eyebrow"><span>Fysikk og matematikk, NTNU</span><span>Utveksling i Busan, høst 2026</span><span>Ser etter sommerjobb 2027</span></div>
+    <ul class="eyebrow">
+      <li>Fysikk og matematikk, NTNU</li>
+      <li>Utveksling i Busan høsten&nbsp;2026</li>
+      <li>Søker sommerjobb&nbsp;2027</li>
+    </ul>
     <h1>David<br><span class="last">Popovic</span></h1>
-    <p class="lede">Student som liker å regne seg fram til gode beslutninger. Interessert i <em>strategi</em>, <em>AI</em> og <em>analyse</em>.</p>
+    <p class="lede">Jeg studerer anvendt fysikk og matematikk og er interessert i <em>strategi</em>, <em>AI</em> og&nbsp;<em>analyse</em>.</p>
     <div class="actions">
-      <a class="btn primary" href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn" href="#erfaring">Se erfaring</a>
+      <a class="btn primary" href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.83 2.67 4.83 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4v-11Z"/></svg>
+        LinkedIn
+      </a>
+      <a class="btn" href="#erfaring">Se erfaring <span aria-hidden="true">↓</span></a>
     </div>
   </div>
 </header>
 
-<main>
-  <section id="om">
-    <div class="label">Om meg</div>
+<main id="innhold">
+  <section id="om" aria-labelledby="om-h">
+    <p class="label">Om meg</p>
     <div>
-      <h2>Matte i bunnen, beslutninger i toppen.</h2>
-      <p>Jeg studerer anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi matematikk og fysikk passet bedre med det jeg faktisk synes er gøy. Høsten 2026 er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
-      <p>Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og jeg har vært læringsassistent i Eksperter i team ved NTNU. Før studiene ledet jeg elevrådet på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
-      <p class="muted">Jeg liker problemer der man må gjøre noe rotete om til en modell, og en modell om til en anbefaling.</p>
+      <h2 id="om-h">Fra datateknologi til fysmat</h2>
+      <p>Jeg studerer anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
+      <p>Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
+      <p>Jeg trives best med oppgaver der jeg får bruke matte og data til å svare på konkrete spørsmål.</p>
     </div>
   </section>
 
-  <section id="fokus">
-    <div class="label">Hva jeg ser etter</div>
+  <section id="sommerjobb" aria-labelledby="sj-h">
+    <p class="label">Hva jeg ser etter</p>
     <div>
-      <h2>Sommerjobb 2027</h2>
+      <h2 id="sj-h">Sommerjobb 2027</h2>
       <div class="areas">
-        <div class="area"><span class="rank">01 · førstevalg</span><h3>Strategi</h3><p>Strukturere uklare problemer, bygge analyser og gi anbefalinger som noen faktisk handler på.</p></div>
-        <div class="area"><span class="rank">02</span><h3>AI</h3><p>Bruke maskinlæring og språkmodeller på ekte forretningsproblemer.</p></div>
-        <div class="area"><span class="rank">03</span><h3>Analyse</h3><p>Modellering, statistikk og data. Der matematikken gjør mest nytte.</p></div>
+        <div class="area"><span class="rank">Førstevalg</span><h3>Strategi</h3><p>Analysere en virksomhet eller et marked og komme fram til en anbefaling.</p></div>
+        <div class="area"><span class="rank">Andrevalg</span><h3>AI</h3><p>Bruke maskinlæring og språkmodeller på konkrete problemer i en bedrift.</p></div>
+        <div class="area"><span class="rank">Det jeg kan</span><h3>Analyse</h3><p>Modellering og statistikk, med Python og Excel som verktøy.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="erfaring">
-    <div class="label">Erfaring</div>
+  <section id="erfaring" aria-labelledby="erf-h">
+    <p class="label" id="erf-h">Erfaring</p>
     <ol class="timeline" reversed>
       <li>
-        <div class="when"><span class="now">aug. 2026 – nå</span></div>
+        <div class="when"><span class="now">aug.&nbsp;2026&#8202;–&#8202;nå</span></div>
         <div><p class="role">Mentor i matematikk og fysikk</p><p class="org">MentorNorge · deltid</p></div>
       </li>
       <li>
-        <div class="when">aug. 2025 – jun. 2026</div>
-        <div><p class="role">Læringsassistent</p><p class="org">NTNU · deltid · Trondheim</p><p class="note">Eksperter i team (AAR4912). Fulgte opp tverrfaglige studentgrupper gjennom samarbeidsprosessen.</p></div>
+        <div class="when">aug.&nbsp;2025&#8202;–&#8202;jun.&nbsp;2026</div>
+        <div><p class="role">Læringsassistent</p><p class="org">NTNU · deltid · Trondheim</p><p class="note">Eksperter i team (AAR4912).</p></div>
       </li>
       <li>
-        <div class="when">mai – aug. 2025</div>
+        <div class="when">mai&#8202;–&#8202;aug.&nbsp;2025</div>
         <div><p class="role">Kafémedarbeider</p><p class="org">Café Larsen · sommerjobb · Hamar</p></div>
       </li>
       <li>
-        <div class="when">aug. 2023 – jun. 2024</div>
+        <div class="when">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
         <div><p class="role">Elevrådsleder</p><p class="org">Hamar katedralskole</p></div>
       </li>
       <li>
-        <div class="when">aug. 2023 – jun. 2024</div>
+        <div class="when">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
         <div><p class="role">Representant i ungdomsrådet</p><p class="org">Hamar kommune</p></div>
       </li>
     </ol>
   </section>
 
-  <section id="utdanning">
-    <div class="label">Utdanning</div>
+  <section id="utdanning" aria-labelledby="utd-h">
+    <p class="label" id="utd-h">Utdanning</p>
     <ol class="timeline" reversed>
       <li>
-        <div class="when"><span class="now">2025 – 2029</span></div>
+        <div class="when"><span class="now">2025&#8202;–&#8202;2029</span></div>
         <div><p class="role">Master, anvendt fysikk og matematikk</p><p class="org">NTNU · Trondheim</p></div>
       </li>
       <li>
-        <div class="when"><span class="now">høst 2026</span></div>
+        <div class="when"><span class="now">høst&nbsp;2026</span></div>
         <div><p class="role">Utvekslingssemester</p><p class="org">Pusan National University · Busan, Sør-Korea</p></div>
       </li>
       <li>
-        <div class="when">2024 – 2025</div>
-        <div><p class="role">Datateknologi</p><p class="org">NTNU · ett år før studiebytte</p></div>
+        <div class="when">2024&#8202;–&#8202;2025</div>
+        <div><p class="role">Datateknologi</p><p class="org">NTNU · ett år før jeg byttet studium</p></div>
       </li>
       <li>
-        <div class="when">2021 – 2024</div>
+        <div class="when">2021&#8202;–&#8202;2024</div>
         <div><p class="role">Studiespesialisering, realfag</p><p class="org">Hamar katedralskole</p><p class="note">Matematikk R1 og R2, fysikk, kjemi og biologi.</p></div>
       </li>
     </ol>
   </section>
 
-  <section id="emner">
-    <div class="label">Utvalgte emner</div>
+  <section id="emner" aria-labelledby="emn-h">
+    <p class="label" id="emn-h">Utvalgte emner</p>
     <div>
-      <div class="chips">
-        <span class="chip">Lineær algebra</span>
-        <span class="chip">Kalkulus</span>
-        <span class="chip">Flervariabel analyse og vektorkalkulus</span>
-        <span class="chip">Statistikk</span>
-        <span class="chip">Diskret matematikk</span>
-        <span class="chip">Mekanikk</span>
-        <span class="chip">Elektrisitet og magnetisme</span>
-        <span class="chip">Objektorientert programmering</span>
-      </div>
-      <p class="muted" style="margin-top:14px">90 studiepoeng fullført ved NTNU.</p>
+      <ul class="chips">
+        <li class="chip">Lineær algebra</li>
+        <li class="chip">Kalkulus</li>
+        <li class="chip">Flervariabel analyse og vektorkalkulus</li>
+        <li class="chip">Statistikk</li>
+        <li class="chip">Diskret matematikk</li>
+        <li class="chip">Mekanikk</li>
+        <li class="chip">Elektrisitet og magnetisme</li>
+        <li class="chip">Objektorientert programmering</li>
+      </ul>
+      <p class="muted foot-note">90 studiepoeng fullført ved NTNU.</p>
     </div>
   </section>
 
-  <section id="ferdigheter">
-    <div class="label">Verktøy og språk</div>
+  <section id="ferdigheter" aria-labelledby="fer-h">
+    <p class="label" id="fer-h">Verktøy og språk</p>
     <div class="skillgrid">
-      <div><p class="sk">Programmering</p><div class="chips"><span class="chip">Python</span><span class="chip">Java</span></div></div>
-      <div><p class="sk">Analyse</p><div class="chips"><span class="chip">Excel</span><span class="chip">PowerPoint</span></div></div>
-      <div><p class="sk">Språk</p><div class="chips"><span class="chip">Norsk · morsmål</span><span class="chip">Serbisk · morsmål</span><span class="chip">Engelsk · C2</span></div></div>
+      <div><p class="sk">Programmering</p><ul class="chips"><li class="chip">Python</li><li class="chip">Java</li></ul></div>
+      <div><p class="sk">Analyse</p><ul class="chips"><li class="chip">Excel</li><li class="chip">PowerPoint</li></ul></div>
+      <div><p class="sk">Språk</p><ul class="chips"><li class="chip">Norsk <span class="lvl">· morsmål</span></li><li class="chip">Serbisk <span class="lvl">· morsmål</span></li><li class="chip">Engelsk <span class="lvl">· C2</span></li></ul></div>
     </div>
   </section>
 </main>
 
 <footer>
-  <span>David Popovic · NTNU Trondheim</span>
-  <a href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">linkedin.com/in/popovicdavid ↗</a>
+  <span>© 2026 David Popovic · Sist oppdatert oktober 2026</span>
+  <nav aria-label="Lenker">
+    <a href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="https://github.com/popovicdavid" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
 </footer>
 
 <script>
 (() => {
   const canvas = document.getElementById('field');
   const ctx = canvas.getContext('2d');
+  const hero = canvas.parentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // viridis stops
+  // Viridis-fargeskala, mørk og lys variant
   const VIR = [[68,1,84],[59,82,139],[33,145,140],[94,201,98],[253,231,37]];
   const VIR_LIGHT = [[68,1,84],[59,82,139],[33,145,140],[30,120,90]];
-  let W, H, dpr, parts = [], t = 0, mouse = null, bgRGB = '11,15,26', light = false;
+  let W = 0, H = 0, parts = [], t = 0, mouse = null, bgRGB = '11,15,26', light = false;
+  let running = false, visible = true;
 
   function readTheme() {
-    const bg = getComputedStyle(document.body).backgroundColor.match(/\d+/g) || [11,15,26];
-    bgRGB = bg.slice(0,3).join(',');
+    const bg = getComputedStyle(document.body).backgroundColor.match(/\d+/g) || [11, 15, 26];
+    bgRGB = bg.slice(0, 3).join(',');
     light = (+bg[0] + +bg[1] + +bg[2]) / 3 > 128;
   }
   function color(s) {
     const stops = light ? VIR_LIGHT : VIR;
     const x = Math.min(0.999, Math.max(0, s)) * (stops.length - 1);
     const i = Math.floor(x), f = x - i, a = stops[i], b = stops[i + 1];
-    return `rgb(${a.map((v, k) => Math.round(v + (b[k] - v) * f)).join(',')})`;
+    return `rgb(${a.map((v, j) => Math.round(v + (b[j] - v) * f)).join(',')})`;
   }
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.round(Math.min(1600, W * H / 520));
-    parts = Array.from({ length: n }, spawn);
-    readTheme();
-    ctx.fillStyle = `rgb(${bgRGB})`; ctx.fillRect(0, 0, W, H);
-  }
+  function clear() { ctx.fillStyle = `rgb(${bgRGB})`; ctx.fillRect(0, 0, W, H); }
   function spawn() { return { x: Math.random() * W, y: Math.random() * H, life: Math.random() * 200 }; }
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    parts = Array.from({ length: Math.round(Math.min(1600, W * H / 520)) }, spawn);
+    readTheme(); clear();
+  }
   const k = 70;
   function vel(x, y) {
     let vx = Math.sin(y / k + t) + 0.5 * Math.cos(x / (2 * k));
     let vy = Math.cos(x / k - t) - 0.5 * Math.sin(y / (2 * k));
     if (mouse) {
-      const dx = x - mouse.x, dy = y - mouse.y, r2 = dx * dx + dy * dy + 400;
-      const s = 9000 / r2;
-      vx += -dy * s / 12; vy += dx * s / 12;
+      const dx = x - mouse.x, dy = y - mouse.y, s = 750 / (dx * dx + dy * dy + 400);
+      vx -= dy * s; vy += dx * s;
     }
     return [vx, vy];
   }
@@ -332,12 +390,11 @@ footer {
     ctx.fillStyle = `rgba(${bgRGB},${light ? 0.07 : 0.06})`;
     ctx.fillRect(0, 0, W, H);
     ctx.lineWidth = 1.1;
+    ctx.globalAlpha = light ? 0.55 : 0.8;
     for (const p of parts) {
       const [vx, vy] = vel(p.x, p.y);
-      const sp = Math.hypot(vx, vy);
       const nx = p.x + vx * 1.4, ny = p.y + vy * 1.4;
-      ctx.strokeStyle = color(sp / 2.2);
-      ctx.globalAlpha = light ? 0.55 : 0.8;
+      ctx.strokeStyle = color(Math.hypot(vx, vy) / 2.2);
       ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
       p.x = nx; p.y = ny; p.life--;
       if (p.life < 0 || nx < 0 || nx > W || ny < 0 || ny > H) Object.assign(p, spawn(), { life: 120 + Math.random() * 160 });
@@ -345,18 +402,33 @@ footer {
     ctx.globalAlpha = 1;
     t += 0.0025;
   }
-  function loop() { step(); if (!reduce) requestAnimationFrame(loop); }
+  function still() { clear(); for (let i = 0; i < 180; i++) step(); }
+  function loop() {
+    if (!visible || document.hidden) { running = false; return; }
+    step(); requestAnimationFrame(loop);
+  }
+  function start() { if (!reduce && !running) { running = true; requestAnimationFrame(loop); } }
 
   resize();
-  if (reduce) { for (let i = 0; i < 180; i++) step(); } else loop();
+  if (reduce) still(); else start();
 
-  addEventListener('resize', () => { clearTimeout(resize.t); resize.t = setTimeout(() => { resize(); if (reduce) for (let i = 0; i < 180; i++) step(); }, 150); });
-  canvas.parentElement.addEventListener('pointermove', e => {
+  // Mobilnettlesere endrer høyden når adresselinja skjules; tegn bare på nytt når bredden endres.
+  let lastW = innerWidth;
+  addEventListener('resize', () => {
+    if (innerWidth === lastW) return;
+    lastW = innerWidth;
+    clearTimeout(resize.timer);
+    resize.timer = setTimeout(() => { resize(); if (reduce) still(); }, 150);
+  });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }).observe(hero);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
+
+  hero.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
     const r = canvas.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
   });
-  canvas.parentElement.addEventListener('pointerleave', () => { mouse = null; });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readTheme(); ctx.fillStyle = `rgb(${bgRGB})`; ctx.fillRect(0, 0, W, H); });
-  new MutationObserver(() => { readTheme(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  hero.addEventListener('pointerleave', () => { mouse = null; });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readTheme(); reduce ? still() : clear(); });
 })();
 </script>
 </body>
