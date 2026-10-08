@@ -7,6 +7,8 @@
 <meta name="description" content="Student i anvendt fysikk og matematikk ved NTNU. Interessert i strategi, AI og analyse.">
 <meta name="author" content="David Popovic">
 <link rel="canonical" href="https://popovicdavid.github.io/">
+<link rel="alternate" hreflang="nb" href="https://popovicdavid.github.io/">
+<link rel="alternate" hreflang="en" href="https://popovicdavid.github.io/?lang=en">
 
 <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png?v=2" type="image/png" sizes="32x32">
@@ -73,6 +75,31 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
 }
 .skip:focus { top: 16px; }
 
+/* Språkvelger */
+.lang {
+  position: fixed; z-index: 20;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(12px, 2.4vw, 22px)); right: var(--gutter);
+  display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+  border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.lang button {
+  position: relative; z-index: 1; border: 0; background: none; cursor: pointer;
+  font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; color: var(--muted);
+  padding: 8px 12px; border-radius: 999px; transition: color .2s ease;
+}
+.lang button:hover { color: var(--fg); }
+.lang button[aria-pressed="true"] { color: var(--ink-on-accent); }
+.lang-pill {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px);
+  border-radius: 999px; background: var(--accent);
+  transition: transform .28s cubic-bezier(.3,.7,.2,1);
+}
+:root[lang="en"] .lang-pill { transform: translateX(100%); }
+body.switching main, body.switching .hero-inner, body.switching footer { opacity: 0; }
+main, .hero-inner, footer { transition: opacity .16s ease; }
+
 /* Hero */
 .hero {
   position: relative;
@@ -121,7 +148,7 @@ h1 .last { color: var(--accent); }
 .btn.primary { background: var(--accent); color: var(--ink-on-accent); border-color: var(--accent); }
 .btn svg { width: 16px; height: 16px; flex: none; }
 .eq {
-  position: absolute; z-index: 1; top: clamp(16px, 3vw, 28px); right: var(--gutter);
+  position: absolute; z-index: 1; top: clamp(64px, 7vw, 80px); right: var(--gutter);
   font: 400 0.75rem/1.6 var(--mono); color: var(--muted); text-align: right;
   background: color-mix(in srgb, var(--bg) 60%, transparent); padding: 8px 12px; border-radius: 8px;
   font-variant-numeric: tabular-nums;
@@ -301,7 +328,7 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
 @media print {
   :root { --bg: #fff; --surface: #fff; --fg: #000; --muted: #444; --line: #ccc; --accent: #000; --accent-2: #000; }
   .hero { min-height: 0; border: 0; }
-  #field, .eq, .actions, .hero::after, .skip, .form { display: none !important; }
+  #field, .eq, .actions, .hero::after, .skip, .form, .lang { display: none !important; }
   .contact { grid-template-columns: 1fr; }
   .hero-inner { padding-top: 24px; }
   h1 { font-size: 48pt; }
@@ -312,165 +339,170 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
 </style>
 </head>
 <body>
-<a class="skip" href="#innhold">Hopp til innholdet</a>
+<div class="lang" role="group" aria-label="Språk / Language">
+  <button type="button" data-lang="nb" aria-pressed="true" lang="nb">NO</button>
+  <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+  <span class="lang-pill" aria-hidden="true"></span>
+</div>
+<a class="skip" href="#innhold" data-i18n="skip">Hopp til innholdet</a>
 
 <header class="hero">
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="eq" aria-hidden="true">
     <b>ẋ</b> = sin(y/k + t) + ½&#8202;cos(x/2k)<br>
     <b>ẏ</b> = cos(x/k − t) − ½&#8202;sin(y/2k)<br>
-    <span class="hint">flytt musa for å lage en virvel</span>
+    <span class="hint" data-i18n="hint">flytt musa for å lage en virvel</span>
   </div>
   <div class="hero-inner">
     <ul class="eyebrow">
-      <li>Fysikk og matematikk, NTNU</li>
-      <li>Utveksling i Busan høsten&nbsp;2026</li>
-      <li>Søker internship sommeren&nbsp;2027</li>
+      <li data-i18n="eb1">Fysikk og matematikk, NTNU</li>
+      <li data-i18n="eb2">Utveksling i Busan høsten&nbsp;2026</li>
+      <li data-i18n="eb3">Søker internship sommeren&nbsp;2027</li>
     </ul>
     <h1>David<br><span class="last">Popovic</span></h1>
-    <p class="lede">Jeg studerer anvendt fysikk og matematikk og er interessert i <em>strategi</em>, <em>AI</em> og&nbsp;<em>analyse</em>.</p>
+    <p class="lede" data-i18n="lede">Jeg studerer fysikk og matematikk ved NTNU og er interessert i <em>strategi</em>, <em>AI</em> og&nbsp;<em>analyse</em>.</p>
     <div class="actions">
       <a class="btn primary" href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.83 2.67 4.83 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4v-11Z"/></svg>
         LinkedIn
       </a>
-      <a class="btn" href="#erfaring">Se erfaring <span class="arr" aria-hidden="true">↓</span></a>
-      <a class="btn" href="#kontakt">Kontakt</a>
+      <a class="btn" href="#erfaring" data-i18n="btnExp">Se erfaring <span class="arr" aria-hidden="true">↓</span></a>
+      <a class="btn" href="#kontakt" data-i18n="btnContact">Kontakt</a>
     </div>
   </div>
 </header>
 
 <main id="innhold">
   <section id="om" aria-labelledby="om-h">
-    <p class="label">Om meg</p>
+    <p class="label" data-i18n="aboutL">Om meg</p>
     <div>
-      <h2 id="om-h">Fra datateknologi til fysmat</h2>
-      <p>Jeg går tredje året på anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
-      <p>Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
-      <p>Jeg er mest glad i den delen av matematikken som kan brukes til å ta beslutninger, som forventningsverdi og risiko. Drømmen er å bruke data og statistikk til å hjelpe bedrifter med å ta bedre valg om pris, markedsføring og salg.</p>
-      <p>Jeg liker også å jobbe med folk. Som mentor og læringsassistent har jeg fått mye trening i å forklare vanskelige ting på en enkel måte.</p>
+      <h2 id="om-h" data-i18n="aboutH">Fra datateknologi til fysmat</h2>
+      <p data-i18n="about1">Jeg går tredje året på anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
+      <p data-i18n="about2">Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
+      <p data-i18n="about3">Jeg er mest glad i den delen av matematikken som kan brukes til å ta beslutninger, som forventningsverdi og risiko. Drømmen er å bruke data og statistikk til å hjelpe bedrifter med å ta bedre valg om pris, markedsføring og salg.</p>
+      <p data-i18n="about4">Jeg liker også å jobbe med folk. Som mentor og læringsassistent har jeg fått mye trening i å forklare vanskelige ting på en enkel måte.</p>
     </div>
   </section>
 
   <section id="sommerjobb" aria-labelledby="sj-h">
-    <p class="label">Hva jeg ser etter</p>
+    <p class="label" data-i18n="lookL">Hva jeg ser etter</p>
     <div>
-      <h2 id="sj-h">Internship sommeren 2027</h2>
-      <p>Jeg ser etter et internship der jeg får jobbe med ekte problemstillinger innen disse områdene:</p>
+      <h2 id="sj-h" data-i18n="lookH">Internship sommeren 2027</h2>
+      <p data-i18n="lookP">Jeg ser etter et internship der jeg får jobbe med ekte problemstillinger innen disse områdene:</p>
       <div class="areas">
-        <div class="area"><h3>Strategi</h3><p>Rådgivning som hjelper bedrifter med å ta bedre beslutninger om pris, markedsføring og salg.</p></div>
-        <div class="area"><h3>Data og AI</h3><p>Både hva AI kan brukes til og matematikken bak hvordan det fungerer.</p></div>
-        <div class="area"><h3>Innsikt og analyse</h3><p>Grave i tall, lønnsomhetsanalyser og modellering i Excel og Python.</p></div>
+        <div class="area" data-i18n="a1"><h3>Strategi</h3><p>Rådgivning som hjelper bedrifter med å ta bedre beslutninger om pris, markedsføring og salg.</p></div>
+        <div class="area" data-i18n="a2"><h3>Data og AI</h3><p>Både hva AI kan brukes til og matematikken bak hvordan det fungerer.</p></div>
+        <div class="area" data-i18n="a3"><h3>Innsikt og analyse</h3><p>Grave i tall, lønnsomhetsanalyser og modellering i Excel og Python.</p></div>
       </div>
     </div>
   </section>
 
   <section id="prosjekter" aria-labelledby="pro-h">
-    <p class="label" id="pro-h">Prosjekter</p>
+    <p class="label" id="pro-h" data-i18n="projL">Prosjekter</p>
     <div class="areas projects">
       <div class="area">
-        <h3>AI-assistert arbeidsflyt i Obsidian</h3>
-        <p>Et system der en AI-assistent holder orden på prosjektene og notatene mine.</p>
+        <h3 data-i18n="p1h">AI-assistert arbeidsflyt i Obsidian</h3>
+        <p data-i18n="p1p">Et system der en AI-assistent holder orden på prosjektene og notatene mine.</p>
         <ul class="tags"><li>AI</li><li>Obsidian</li></ul>
       </div>
       <a class="area project-link" href="https://github.com/popovicdavid/popovicdavid.github.io" target="_blank" rel="noopener">
-        <h3>Denne nettsiden <span class="arr" aria-hidden="true">↗</span></h3>
-        <p>Feltet øverst er et system av differensiallikninger som regnes ut og tegnes i sanntid. Koden ligger åpent på GitHub.</p>
+        <h3 data-i18n="p2h">Denne nettsiden <span class="arr" aria-hidden="true">↗</span></h3>
+        <p data-i18n="p2p">Feltet øverst er et system av differensiallikninger som regnes ut og tegnes i sanntid. Koden ligger åpent på GitHub.</p>
         <ul class="tags"><li>HTML/CSS/JS</li><li>GitHub Pages</li></ul>
       </a>
     </div>
   </section>
 
   <section id="erfaring" aria-labelledby="erf-h">
-    <p class="label" id="erf-h">Erfaring</p>
+    <p class="label" id="erf-h" data-i18n="expL">Erfaring</p>
     <ol class="timeline" reversed>
       <li>
-        <div class="when"><span class="now">aug.&nbsp;2026&#8202;–&#8202;nå</span></div>
-        <div><p class="role">Mentor i matematikk og fysikk</p><p class="org">MentorNorge · deltid</p></div>
+        <div class="when"><span class="now" data-i18n="d1">aug.&nbsp;2026&#8202;–&#8202;nå</span></div>
+        <div><p class="role" data-i18n="r1">Mentor i matematikk og fysikk</p><p class="org" data-i18n="o1">MentorNorge · deltid</p></div>
       </li>
       <li>
-        <div class="when">aug.&nbsp;2025&#8202;–&#8202;jun.&nbsp;2026</div>
-        <div><p class="role">Læringsassistent</p><p class="org">NTNU · deltid · Trondheim</p><p class="note">Eksperter i team (AAR4912).</p></div>
+        <div class="when" data-i18n="d2">aug.&nbsp;2025&#8202;–&#8202;jun.&nbsp;2026</div>
+        <div><p class="role" data-i18n="r2">Læringsassistent</p><p class="org" data-i18n="o2">NTNU · deltid · Trondheim</p><p class="note" data-i18n="n2">Eksperter i team (AAR4912).</p></div>
       </li>
       <li>
-        <div class="when">mai&#8202;–&#8202;aug.&nbsp;2025</div>
-        <div><p class="role">Kafémedarbeider</p><p class="org">Café Larsen · sommerjobb · Hamar</p></div>
+        <div class="when" data-i18n="d3">mai&#8202;–&#8202;aug.&nbsp;2025</div>
+        <div><p class="role" data-i18n="r3">Kafémedarbeider</p><p class="org" data-i18n="o3">Café Larsen · sommerjobb · Hamar</p></div>
       </li>
       <li>
-        <div class="when">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
-        <div><p class="role">Elevrådsleder</p><p class="org">Hamar katedralskole</p></div>
+        <div class="when" data-i18n="d4">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
+        <div><p class="role" data-i18n="r4">Elevrådsleder</p><p class="org">Hamar katedralskole</p></div>
       </li>
       <li>
-        <div class="when">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
-        <div><p class="role">Representant i ungdomsrådet</p><p class="org">Hamar kommune</p></div>
+        <div class="when" data-i18n="d4">aug.&nbsp;2023&#8202;–&#8202;jun.&nbsp;2024</div>
+        <div><p class="role" data-i18n="r5">Representant i ungdomsrådet</p><p class="org" data-i18n="o5">Hamar kommune</p></div>
       </li>
     </ol>
   </section>
 
   <section id="utdanning" aria-labelledby="utd-h">
-    <p class="label" id="utd-h">Utdanning</p>
+    <p class="label" id="utd-h" data-i18n="eduL">Utdanning</p>
     <ol class="timeline" reversed>
       <li>
         <div class="when"><span class="now">2025&#8202;–&#8202;2029</span></div>
-        <div><p class="role">Master, anvendt fysikk og matematikk</p><p class="org">NTNU · Trondheim</p></div>
+        <div><p class="role" data-i18n="e1">Master, anvendt fysikk og matematikk</p><p class="org">NTNU · Trondheim</p></div>
       </li>
       <li>
-        <div class="when"><span class="now">høst&nbsp;2026</span></div>
-        <div><p class="role">Utvekslingssemester</p><p class="org">Pusan National University · Busan, Sør-Korea</p></div>
+        <div class="when"><span class="now" data-i18n="ed2">høst&nbsp;2026</span></div>
+        <div><p class="role" data-i18n="e2">Utvekslingssemester</p><p class="org" data-i18n="eo2">Pusan National University · Busan, Sør-Korea</p></div>
       </li>
       <li>
         <div class="when">2024&#8202;–&#8202;2025</div>
-        <div><p class="role">Datateknologi</p><p class="org">NTNU · ett år før jeg byttet studium</p></div>
+        <div><p class="role" data-i18n="e3">Datateknologi</p><p class="org" data-i18n="eo3">NTNU · ett år før jeg byttet studium</p></div>
       </li>
       <li>
         <div class="when">2021&#8202;–&#8202;2024</div>
-        <div><p class="role">Studiespesialisering, realfag</p><p class="org">Hamar katedralskole</p><p class="note">Matematikk R1 og R2, fysikk, kjemi og biologi.</p></div>
+        <div><p class="role" data-i18n="e4">Studiespesialisering, realfag</p><p class="org">Hamar katedralskole</p><p class="note" data-i18n="en4">Matematikk R1 og R2, fysikk, kjemi og biologi.</p></div>
       </li>
     </ol>
   </section>
 
   <section id="emner" aria-labelledby="emn-h">
-    <p class="label" id="emn-h">Utvalgte emner</p>
+    <p class="label" id="emn-h" data-i18n="coursesL">Utvalgte emner</p>
     <div>
       <ul class="chips">
-        <li class="chip" tabindex="0" data-tip="TMA4115 · NTNU">Lineær algebra</li>
-        <li class="chip" tabindex="0" data-tip="TMA4100 · NTNU">Kalkulus</li>
-        <li class="chip" tabindex="0" data-tip="MA1103 · NTNU">Flervariabel analyse og vektorkalkulus</li>
-        <li class="chip" tabindex="0" data-tip="TMA4240 · NTNU">Statistikk</li>
-        <li class="chip" tabindex="0" data-tip="TMA4140 · NTNU">Diskret matematikk</li>
-        <li class="chip" tabindex="0" data-tip="FY1020 · NTNU">Mekanikk</li>
-        <li class="chip" tabindex="0" data-tip="TFY4030 · NTNU">Elektrisitet og magnetisme</li>
-        <li class="chip" tabindex="0" data-tip="TDT4100 · NTNU">Objektorientert programmering</li>
+        <li class="chip" tabindex="0" data-tip="TMA4115 · NTNU" data-i18n="c1">Lineær algebra</li>
+        <li class="chip" tabindex="0" data-tip="TMA4100 · NTNU" data-i18n="c2">Kalkulus</li>
+        <li class="chip" tabindex="0" data-tip="MA1103 · NTNU" data-i18n="c3">Flervariabel analyse og vektorkalkulus</li>
+        <li class="chip" tabindex="0" data-tip="TMA4240 · NTNU" data-i18n="c4">Statistikk</li>
+        <li class="chip" tabindex="0" data-tip="TMA4140 · NTNU" data-i18n="c5">Diskret matematikk</li>
+        <li class="chip" tabindex="0" data-tip="FY1020 · NTNU" data-i18n="c6">Mekanikk</li>
+        <li class="chip" tabindex="0" data-tip="TFY4030 · NTNU" data-i18n="c7">Elektrisitet og magnetisme</li>
+        <li class="chip" tabindex="0" data-tip="TDT4100 · NTNU" data-i18n="c8">Objektorientert programmering</li>
       </ul>
-      <p class="muted foot-note">90 studiepoeng fullført ved NTNU.</p>
+      <p class="muted foot-note" data-i18n="ects">90 studiepoeng fullført ved NTNU.</p>
     </div>
   </section>
 
   <section id="ferdigheter" aria-labelledby="fer-h">
-    <p class="label" id="fer-h">Verktøy og språk</p>
+    <p class="label" id="fer-h" data-i18n="toolsL">Verktøy og språk</p>
     <div class="skillgrid">
-      <div><p class="sk">Programmering</p><ul class="chips"><li class="chip" tabindex="0" data-tip="Brukt i studiet ved NTNU">Python</li><li class="chip" tabindex="0" data-tip="TDT4100 · objektorientert">Java</li></ul></div>
-      <div><p class="sk">Analyse</p><ul class="chips"><li class="chip" tabindex="0">Excel</li><li class="chip" tabindex="0">PowerPoint</li></ul></div>
-      <div><p class="sk">Språk</p><ul class="chips"><li class="chip" tabindex="0">Norsk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0">Serbisk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0">Engelsk <span class="lvl">· C2</span></li></ul></div>
+      <div><p class="sk" data-i18n="skP">Programmering</p><ul class="chips"><li class="chip" tabindex="0" data-tip="Brukt i studiet ved NTNU" data-i18n-tip="tipPy">Python</li><li class="chip" tabindex="0" data-tip="TDT4100 · objektorientert" data-i18n-tip="tipJava">Java</li></ul></div>
+      <div><p class="sk" data-i18n="skA">Analyse</p><ul class="chips"><li class="chip" tabindex="0">Excel</li><li class="chip" tabindex="0">PowerPoint</li></ul></div>
+      <div><p class="sk" data-i18n="skL">Språk</p><ul class="chips"><li class="chip" tabindex="0" data-i18n="lNo">Norsk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0" data-i18n="lSr">Serbisk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0" data-i18n="lEn">Engelsk <span class="lvl">· C2</span></li></ul></div>
     </div>
   </section>
 
   <section id="kontakt" aria-labelledby="kon-h">
-    <p class="label">Kontakt</p>
+    <p class="label" data-i18n="conL">Kontakt</p>
     <div>
-      <h2 id="kon-h">Ta kontakt<span class="brace" aria-hidden="true">{</span></h2>
-      <p class="muted">Har du et prosjekt eller et spørsmål? Send meg en melding.</p>
+      <h2 id="kon-h" data-i18n="conH">Ta kontakt<span class="brace" aria-hidden="true">{</span></h2>
+      <p class="muted" data-i18n="conP">Har du et prosjekt eller et spørsmål? Send meg en melding.</p>
       <div class="contact">
         <form class="form" id="kontaktskjema" novalidate>
-          <div class="field"><label for="k-epost">Din e-post</label><input id="k-epost" name="epost" type="email" autocomplete="email" placeholder="navn@firma.no" required></div>
-          <div class="field"><label for="k-emne">Emne</label><input id="k-emne" name="emne" type="text" placeholder="" required></div>
-          <div class="field"><label for="k-melding">Melding</label><textarea id="k-melding" name="melding" placeholder="Hei David …" required></textarea></div>
-          <button class="submit" type="submit">Send melding</button>
+          <div class="field"><label for="k-epost" data-i18n="fEmail">Din e-post</label><input id="k-epost" name="epost" type="email" autocomplete="email" placeholder="navn@firma.no" data-i18n-ph="phEmail" required></div>
+          <div class="field"><label for="k-emne" data-i18n="fSubj">Emne</label><input id="k-emne" name="emne" type="text" placeholder="" required></div>
+          <div class="field"><label for="k-melding" data-i18n="fMsg">Melding</label><textarea id="k-melding" name="melding" placeholder="Hei David …" data-i18n-ph="phMsg" required></textarea></div>
+          <button class="submit" type="submit" data-i18n="fSend">Send melding</button>
           <p class="status" id="k-status" aria-live="polite"></p>
         </form>
         <ul class="links">
           <li><a href="https://github.com/popovicdavid" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg><span class="txt">popovicdavid<span class="sub">GitHub</span></span></a></li>
-          <li><button type="button" id="kopier-epost"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg><span class="txt"><span id="epost-tekst">e-post</span><span class="sub" id="kopier-hint">Klikk for å kopiere</span></span></button></li>
+          <li><button type="button" id="kopier-epost"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg><span class="txt"><span id="epost-tekst">e-post</span><span class="sub" id="kopier-hint" data-i18n="copyHint">Klikk for å kopiere</span></span></button></li>
           <li><a href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.83 2.67 4.83 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4v-11Z"/></svg><span class="txt">David Popovic<span class="sub">LinkedIn</span></span></a></li>
         </ul>
       </div>
@@ -480,8 +512,8 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
 </main>
 
 <footer>
-  <span>© 2026 David Popovic · Sist oppdatert oktober 2026</span>
-  <nav aria-label="Lenker">
+  <span data-i18n="foot">© 2026 David Popovic · Sist oppdatert oktober 2026</span>
+  <nav aria-label="Lenker" data-i18n-aria="navAria">
     <a href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a href="https://github.com/popovicdavid" target="_blank" rel="noopener">GitHub ↗</a>
   </nav>
@@ -575,6 +607,132 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readTheme(); reduce ? still() : clear(); });
 })();
 
+
+// Oversettelser. Norsk står i HTML-en; her ligger engelsk og tekstene skriptet trenger.
+const I18N = {
+  nb: {
+    copied: 'Kopiert ✓', selected: 'Merket, trykk Cmd+C', copyHint: 'Klikk for å kopiere',
+    badEmail: 'Sjekk at e-postadressen er riktig.', fillAll: 'Fyll ut alle feltene.',
+    opened: 'E-postprogrammet ditt skal nå åpne seg med meldingen. Skjer det ikke, kan du sende den direkte til {addr}.',
+    description: 'Student i anvendt fysikk og matematikk ved NTNU. Interessert i strategi, AI og analyse.'
+  },
+  en: {
+    skip: 'Skip to content',
+    hint: 'move your mouse to stir up a vortex',
+    eb1: 'Physics and mathematics, NTNU',
+    eb2: 'Exchange in Busan, fall&nbsp;2026',
+    eb3: 'Seeking a summer&nbsp;2027 internship',
+    lede: 'I study physics and mathematics at NTNU, and I’m interested in <em>strategy</em>, <em>AI</em> and&nbsp;<em>analytics</em>.',
+    btnExp: 'See experience <span class="arr" aria-hidden="true">↓</span>',
+    btnContact: 'Contact',
+    aboutL: 'About',
+    aboutH: 'From computer science to physics and math',
+    about1: 'I’m a third-year student in Applied Physics and Mathematics at NTNU. I started out in Computer Science in 2024, but switched after a year because I wanted more math and physics. This fall I’m on exchange at Pusan National University in South Korea.',
+    about2: 'Alongside my studies I work as a math and physics mentor, and last year I was a learning assistant in Experts in Teamwork at NTNU. In high school I was student council president at Hamar katedralskole and sat on the Hamar municipal youth council.',
+    about3: 'The part of mathematics I like best is the part you can use to make decisions, like expected value and risk. My goal is to use data and statistics to help companies make better calls on pricing, marketing and sales.',
+    about4: 'I also enjoy working with people. As a mentor and learning assistant, I’ve had a lot of practice explaining difficult ideas in a simple way.',
+    lookL: 'What I’m looking for',
+    lookH: 'Summer internship 2027',
+    lookP: 'I’m looking for an internship where I get to work on real problems in these areas:',
+    a1: '<h3>Strategy</h3><p>Advisory work that helps companies make better decisions on pricing, marketing and sales.</p>',
+    a2: '<h3>Data and AI</h3><p>Both what AI can be used for and the mathematics behind how it works.</p>',
+    a3: '<h3>Analytics</h3><p>Digging into the numbers: profitability analysis and modeling in Excel and Python.</p>',
+    projL: 'Projects',
+    p1h: 'AI-assisted workflow in Obsidian',
+    p1p: 'A system where an AI assistant keeps my projects and notes organized.',
+    p2h: 'This website <span class="arr" aria-hidden="true">↗</span>',
+    p2p: 'The field at the top is a system of differential equations, solved and drawn in real time. The code is open on GitHub.',
+    expL: 'Experience',
+    d1: 'Aug&nbsp;2026&#8202;–&#8202;present',
+    r1: 'Mathematics and Physics Mentor',
+    o1: 'MentorNorge · part-time',
+    d2: 'Aug&nbsp;2025&#8202;–&#8202;Jun&nbsp;2026',
+    r2: 'Learning Assistant',
+    o2: 'NTNU · part-time · Trondheim',
+    n2: 'Experts in Teamwork (AAR4912).',
+    d3: 'May&#8202;–&#8202;Aug&nbsp;2025',
+    r3: 'Café Assistant',
+    o3: 'Café Larsen · summer job · Hamar',
+    d4: 'Aug&nbsp;2023&#8202;–&#8202;Jun&nbsp;2024',
+    r4: 'Student Council President',
+    r5: 'Youth Council Representative',
+    o5: 'Hamar Municipality',
+    eduL: 'Education',
+    e1: 'Integrated Master’s, Applied Physics and Mathematics',
+    ed2: 'Fall&nbsp;2026',
+    e2: 'Exchange semester',
+    eo2: 'Pusan National University · Busan, South Korea',
+    e3: 'Computer Science',
+    eo3: 'NTNU · one year before switching programs',
+    e4: 'Upper secondary school, natural sciences',
+    en4: 'Advanced mathematics (R1 and R2), physics, chemistry and biology.',
+    coursesL: 'Selected courses',
+    c1: 'Linear algebra', c2: 'Calculus', c3: 'Multivariable calculus and vector analysis', c4: 'Statistics',
+    c5: 'Discrete mathematics', c6: 'Mechanics', c7: 'Electricity and magnetism', c8: 'Object-oriented programming',
+    ects: '90 ECTS credits completed at NTNU.',
+    toolsL: 'Tools and languages',
+    skP: 'Programming', skA: 'Analytics', skL: 'Languages',
+    lNo: 'Norwegian <span class="lvl">· native</span>',
+    lSr: 'Serbian <span class="lvl">· native</span>',
+    lEn: 'English <span class="lvl">· C2</span>',
+    tipPy: 'Used in my studies at NTNU',
+    tipJava: 'TDT4100 · object-oriented',
+    conL: 'Contact',
+    conH: 'Get in touch<span class="brace" aria-hidden="true">{</span>',
+    conP: 'Have a project or a question? Send me a message.',
+    fEmail: 'Your email', fSubj: 'Subject', fMsg: 'Message', fSend: 'Send message',
+    phEmail: 'name@company.com', phMsg: 'Hi David …',
+    copyHint: 'Click to copy', copied: 'Copied ✓', selected: 'Selected, press Cmd+C',
+    badEmail: 'Please check that the email address is correct.', fillAll: 'Please fill in all the fields.',
+    opened: 'Your email app should now open with the message. If it doesn’t, you can send it directly to {addr}.',
+    navAria: 'Links',
+    foot: '© 2026 David Popovic · Last updated October 2026',
+    description: 'Applied physics and mathematics student at NTNU, interested in strategy, AI and analytics.'
+  }
+};
+let LANG = 'nb';
+const t = key => (I18N[LANG] && I18N[LANG][key]) || I18N.nb[key] || '';
+
+(() => {
+  const sel = (a) => document.querySelectorAll(`[${a}]`);
+  // Ta vare på den norske teksten fra HTML-en
+  sel('data-i18n').forEach(el => { el.dataset.nb = el.innerHTML; });
+  sel('data-i18n-ph').forEach(el => { el.dataset.nbPh = el.placeholder; });
+  sel('data-i18n-tip').forEach(el => { el.dataset.nbTip = el.dataset.tip; });
+  sel('data-i18n-aria').forEach(el => { el.dataset.nbAria = el.getAttribute('aria-label'); });
+  const metaDesc = document.querySelector('meta[name="description"]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function apply(lang) {
+    LANG = lang;
+    const en = lang === 'en';
+    sel('data-i18n').forEach(el => { el.innerHTML = en ? (I18N.en[el.dataset.i18n] ?? el.dataset.nb) : el.dataset.nb; });
+    sel('data-i18n-ph').forEach(el => { el.placeholder = en ? I18N.en[el.dataset.i18nPh] : el.dataset.nbPh; });
+    sel('data-i18n-tip').forEach(el => { el.dataset.tip = en ? I18N.en[el.dataset.i18nTip] : el.dataset.nbTip; });
+    sel('data-i18n-aria').forEach(el => { el.setAttribute('aria-label', en ? I18N.en[el.dataset.i18nAria] : el.dataset.nbAria); });
+    document.documentElement.lang = lang;
+    metaDesc.content = t('description');
+    document.getElementById('k-status').textContent = '';
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  }
+  function setLang(lang, animate) {
+    if (lang === LANG) return;
+    try { localStorage.setItem('lang', lang); } catch {}
+    const url = new URL(location.href);
+    if (lang === 'en') url.searchParams.set('lang', 'en'); else url.searchParams.delete('lang');
+    history.replaceState(null, '', url);
+    if (!animate || reduce) { apply(lang); return; }
+    document.body.classList.add('switching');
+    setTimeout(() => { apply(lang); document.body.classList.remove('switching'); }, 160);
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
+
+  // Språk fra lenken (?lang=en) går foran det besøkende valgte sist
+  let start = new URLSearchParams(location.search).get('lang');
+  if (!start) { try { start = localStorage.getItem('lang'); } catch {} }
+  if (start === 'en') apply('en');
+})();
+
 // Lys som følger musa i kortene
 document.querySelectorAll('.area').forEach(el => {
   el.addEventListener('pointermove', e => {
@@ -593,9 +751,9 @@ document.querySelectorAll('.area').forEach(el => {
   label.textContent = addr;
 
   async function copy() {
-    try { await navigator.clipboard.writeText(addr); hint.textContent = 'Kopiert ✓'; }
-    catch { getSelection().selectAllChildren(label); hint.textContent = 'Merket, trykk Cmd+C'; }
-    clearTimeout(copy.t); copy.t = setTimeout(() => { hint.textContent = 'Klikk for å kopiere'; }, 2200);
+    try { await navigator.clipboard.writeText(addr); hint.textContent = t('copied'); }
+    catch { getSelection().selectAllChildren(label); hint.textContent = t('selected'); }
+    clearTimeout(copy.t); copy.t = setTimeout(() => { hint.textContent = t('copyHint'); }, 2200);
   }
   copyBtn.addEventListener('click', copy);
 
@@ -605,14 +763,14 @@ document.querySelectorAll('.area').forEach(el => {
     e.preventDefault();
     if (!form.checkValidity()) {
       const bad = form.querySelector(':invalid');
-      status.textContent = bad.type === 'email' && bad.value ? 'Sjekk at e-postadressen er riktig.' : 'Fyll ut alle feltene.';
+      status.textContent = bad.type === 'email' && bad.value ? t('badEmail') : t('fillAll');
       bad.focus();
       return;
     }
     const f = new FormData(form);
     const body = `${f.get('melding')}\n\n– ${f.get('epost')}`;
     location.href = `mailto:${addr}?subject=${encodeURIComponent(f.get('emne'))}&body=${encodeURIComponent(body)}`;
-    status.textContent = `E-postprogrammet ditt skal nå åpne seg med meldingen. Skjer det ikke, kan du sende den direkte til ${addr}.`;
+    status.textContent = t('opened').replace('{addr}', addr);
   });
 })();
 </script>
