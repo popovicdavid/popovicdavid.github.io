@@ -150,7 +150,10 @@ p:last-child { margin-bottom: 0; }
 
 .areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 8px; }
 .area { background: var(--surface); padding: 22px 22px 24px; display: grid; gap: 8px; align-content: start; }
-.area .rank { font: 500 0.72rem/1.2 var(--mono); color: var(--accent-2); letter-spacing: 0.08em; text-transform: uppercase; }
+.projects { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+.projects .area { padding: 24px 24px 22px; gap: 10px; }
+.tags { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.04em; color: var(--accent-2); border: 1px solid color-mix(in srgb, var(--accent-2) 40%, transparent); padding: 6px 8px; border-radius: 6px; }
 .area h3 { font: 700 1.35rem/1.1 var(--display); margin: 0; letter-spacing: -0.02em; }
 .area p { font-size: 0.95rem; color: var(--muted); margin: 0; }
 
@@ -280,7 +283,7 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
 @media (max-width: 820px) {
   section { grid-template-columns: minmax(0, 1fr); }
   .label { padding-top: 0; }
-  .areas { grid-template-columns: minmax(0, 1fr); }
+  .areas, .projects { grid-template-columns: minmax(0, 1fr); }
   .timeline li { grid-template-columns: minmax(0, 1fr); }
   .eq { display: none; }
   .contact { grid-template-columns: minmax(0, 1fr); }
@@ -319,7 +322,7 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <ul class="eyebrow">
       <li>Fysikk og matematikk, NTNU</li>
       <li>Utveksling i Busan høsten&nbsp;2026</li>
-      <li>Søker sommerjobb&nbsp;2027</li>
+      <li>Søker internship sommeren&nbsp;2027</li>
     </ul>
     <h1>David<br><span class="last">Popovic</span></h1>
     <p class="lede">Jeg studerer anvendt fysikk og matematikk og er interessert i <em>strategi</em>, <em>AI</em> og&nbsp;<em>analyse</em>.</p>
@@ -341,18 +344,36 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
       <h2 id="om-h">Fra datateknologi til fysmat</h2>
       <p>Jeg studerer anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
       <p>Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
-      <p>Jeg trives best med oppgaver der jeg får bruke matte og data til å svare på konkrete spørsmål.</p>
+      <p>Jeg er mest glad i den delen av matematikken som kan brukes til å ta beslutninger, som forventningsverdi og risiko. Drømmen er å bruke data og statistikk til å hjelpe bedrifter med å ta bedre valg om pris, markedsføring og salg.</p>
+      <p>Jeg liker også å jobbe med folk. Som mentor og læringsassistent har jeg fått mye trening i å forklare vanskelige ting på en enkel måte.</p>
     </div>
   </section>
 
   <section id="sommerjobb" aria-labelledby="sj-h">
     <p class="label">Hva jeg ser etter</p>
     <div>
-      <h2 id="sj-h">Sommerjobb 2027</h2>
+      <h2 id="sj-h">Internship sommeren 2027</h2>
+      <p>Jeg ser etter et internship der jeg får jobbe med ekte problemstillinger innen disse områdene:</p>
       <div class="areas">
-        <div class="area"><span class="rank">Førstevalg</span><h3>Strategi</h3><p>Analysere en virksomhet eller et marked og komme fram til en anbefaling.</p></div>
-        <div class="area"><span class="rank">Andrevalg</span><h3>AI</h3><p>Bruke maskinlæring og språkmodeller på konkrete problemer i en bedrift.</p></div>
-        <div class="area"><span class="rank">Det jeg kan</span><h3>Analyse</h3><p>Modellering og statistikk, med Python og Excel som verktøy.</p></div>
+        <div class="area"><h3>Strategi</h3><p>Rådgivning som hjelper bedrifter med å ta bedre beslutninger om pris, markedsføring og salg.</p></div>
+        <div class="area"><h3>Data og AI</h3><p>Både hva AI kan brukes til og matematikken bak hvordan det fungerer.</p></div>
+        <div class="area"><h3>Innsikt og analyse</h3><p>Grave i tall, lønnsomhetsanalyser og modellering i Excel og Python.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prosjekter" aria-labelledby="pro-h">
+    <p class="label" id="pro-h">Prosjekter</p>
+    <div class="areas projects">
+      <div class="area">
+        <h3>iOS-app med Screen Time</h3>
+        <p>Laget en app som bruker Apples Screen Time API, uten å ha jobbet med iOS-utvikling før.</p>
+        <ul class="tags"><li>iOS</li><li>Screen Time API</li></ul>
+      </div>
+      <div class="area">
+        <h3>AI-assistert arbeidsflyt i Obsidian</h3>
+        <p>Et system der en AI-assistent holder orden på prosjektene og notatene mine. Denne nettsiden ble laget på samme måte.</p>
+        <ul class="tags"><li>AI</li><li>Obsidian</li></ul>
       </div>
     </div>
   </section>
@@ -435,11 +456,11 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <p class="label">Kontakt</p>
     <div>
       <h2 id="kon-h">Ta kontakt<span class="brace" aria-hidden="true">{</span></h2>
-      <p class="muted">Har du en sommerjobb, et prosjekt eller et spørsmål? Send meg en melding.</p>
+      <p class="muted">Har du et prosjekt eller et spørsmål? Send meg en melding.</p>
       <div class="contact">
         <form class="form" id="kontaktskjema" novalidate>
           <div class="field"><label for="k-epost">Din e-post</label><input id="k-epost" name="epost" type="email" autocomplete="email" placeholder="navn@firma.no" required></div>
-          <div class="field"><label for="k-emne">Emne</label><input id="k-emne" name="emne" type="text" placeholder="Sommerjobb 2027" required></div>
+          <div class="field"><label for="k-emne">Emne</label><input id="k-emne" name="emne" type="text" placeholder="" required></div>
           <div class="field"><label for="k-melding">Melding</label><textarea id="k-melding" name="melding" placeholder="Hei David …" required></textarea></div>
           <button class="submit" type="submit">Send melding</button>
           <p class="status" id="k-status" aria-live="polite"></p>
