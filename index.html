@@ -61,6 +61,7 @@ body {
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-synthesis: none;
+  overflow-x: clip;
 }
 ::selection { background: var(--accent); color: var(--ink-on-accent); }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
@@ -173,7 +174,97 @@ p:last-child { margin-bottom: 0; }
   border: 1px solid var(--line); background: var(--surface);
 }
 .chip .lvl { color: var(--muted); font-weight: 400; }
+.chip {
+  position: relative; cursor: default;
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+.chip:hover, .chip:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--surface));
+  box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--accent-2) 60%, transparent);
+  outline: none;
+}
+.chip[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; left: 50%; bottom: calc(100% + 10px);
+  transform: translate(-50%, 4px);
+  white-space: nowrap; pointer-events: none;
+  font: 500 0.72rem/1 var(--mono); letter-spacing: 0.04em;
+  padding: 7px 10px; border-radius: 6px;
+  background: var(--fg); color: var(--bg);
+  opacity: 0; transition: opacity .15s ease, transform .15s ease;
+}
+.chip[data-tip]:hover::after, .chip[data-tip]:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
 .foot-note { margin-top: 14px; }
+
+/* Kort med lys som følger musa */
+.area { position: relative; transition: background-color .2s ease; }
+.area::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+  transition: opacity .25s ease;
+}
+.area:hover::before { opacity: 1; }
+.area > * { position: relative; }
+.area h3 { transition: color .2s ease; }
+.area:hover h3 { color: var(--accent); }
+
+/* Tidslinje */
+.timeline li { position: relative; transition: background-color .2s ease; }
+.timeline li::before {
+  content: ""; position: absolute; left: -16px; top: 20px; bottom: 20px; width: 2px; border-radius: 2px;
+  background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .25s ease;
+}
+.timeline li:hover::before { transform: scaleY(1); }
+.timeline li > div:last-child { transition: transform .25s ease; }
+.timeline li:hover > div:last-child { transform: translateX(6px); }
+.timeline li:hover .when { color: var(--fg); }
+
+.btn .arr { display: inline-block; transition: transform .2s ease; }
+.btn:hover .arr { transform: translateY(3px); }
+
+/* Kontakt */
+.brace { font: 500 1em/1 var(--mono); color: var(--accent-2); margin-left: 0.25em; }
+.brace-close { font: 500 clamp(1.8rem, 4vw, 2.8rem)/1 var(--mono); color: var(--accent-2); margin: 28px 0 0; }
+.contact { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; margin-top: 8px; align-items: start; }
+.form { display: grid; gap: 16px; }
+.field { display: grid; gap: 8px; }
+.field label { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.field input, .field textarea {
+  width: 100%; font: 400 1rem/1.5 var(--body); color: var(--fg);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.field textarea { min-height: 140px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
+.field input:hover, .field textarea:hover { border-color: color-mix(in srgb, var(--muted) 60%, var(--line)); }
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.field input:user-invalid, .field textarea:user-invalid { border-color: #ff6b6b; }
+.submit {
+  font: 600 1rem/1 var(--body); color: var(--ink-on-accent); background: var(--accent);
+  border: 0; border-radius: 10px; padding: 15px 20px; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.submit:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px var(--accent); }
+.submit:active { transform: translateY(0); }
+.status { font-size: 0.92rem; color: var(--muted); min-height: 1.4em; margin: 0; }
+.links { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.links a, .links button {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  padding: 12px 14px; border-radius: 10px; border: 1px solid transparent;
+  font: 400 1rem/1.3 var(--body); color: var(--fg); text-decoration: none; text-align: left;
+  background: none; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.links a:hover, .links button:hover { background: var(--surface); border-color: var(--line); }
+.links svg { width: 22px; height: 22px; flex: none; color: var(--muted); transition: color .15s ease, transform .2s ease; }
+.links a:hover svg, .links button:hover svg { color: var(--accent); transform: scale(1.1); }
+.links .sub { display: block; font: 400 0.78rem/1.3 var(--mono); color: var(--muted); }
+.links .txt { min-width: 0; overflow-wrap: anywhere; }
 
 footer {
   max-width: 1120px; margin: 0 auto;
@@ -192,15 +283,20 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   .areas { grid-template-columns: minmax(0, 1fr); }
   .timeline li { grid-template-columns: minmax(0, 1fr); }
   .eq { display: none; }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+  .timeline li::before { left: -10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .btn { transition: none; }
+  *, *::before, *::after { transition: none !important; }
+  .chip:hover, .chip:focus-visible, .submit:hover, .btn:hover { transform: none; }
+  .timeline li:hover > div:last-child { transform: none; }
 }
 @media print {
   :root { --bg: #fff; --surface: #fff; --fg: #000; --muted: #444; --line: #ccc; --accent: #000; --accent-2: #000; }
   .hero { min-height: 0; border: 0; }
-  #field, .eq, .actions, .hero::after, .skip { display: none !important; }
+  #field, .eq, .actions, .hero::after, .skip, .form { display: none !important; }
+  .contact { grid-template-columns: 1fr; }
   .hero-inner { padding-top: 24px; }
   h1 { font-size: 48pt; }
   main { padding-block: 24px; gap: 28px; }
@@ -232,7 +328,8 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.83 2.67 4.83 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4v-11Z"/></svg>
         LinkedIn
       </a>
-      <a class="btn" href="#erfaring">Se erfaring <span aria-hidden="true">↓</span></a>
+      <a class="btn" href="#erfaring">Se erfaring <span class="arr" aria-hidden="true">↓</span></a>
+      <a class="btn" href="#kontakt">Kontakt</a>
     </div>
   </div>
 </header>
@@ -312,14 +409,14 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <p class="label" id="emn-h">Utvalgte emner</p>
     <div>
       <ul class="chips">
-        <li class="chip">Lineær algebra</li>
-        <li class="chip">Kalkulus</li>
-        <li class="chip">Flervariabel analyse og vektorkalkulus</li>
-        <li class="chip">Statistikk</li>
-        <li class="chip">Diskret matematikk</li>
-        <li class="chip">Mekanikk</li>
-        <li class="chip">Elektrisitet og magnetisme</li>
-        <li class="chip">Objektorientert programmering</li>
+        <li class="chip" tabindex="0" data-tip="TMA4115 · NTNU">Lineær algebra</li>
+        <li class="chip" tabindex="0" data-tip="TMA4100 · NTNU">Kalkulus</li>
+        <li class="chip" tabindex="0" data-tip="MA1103 · NTNU">Flervariabel analyse og vektorkalkulus</li>
+        <li class="chip" tabindex="0" data-tip="TMA4240 · NTNU">Statistikk</li>
+        <li class="chip" tabindex="0" data-tip="TMA4140 · NTNU">Diskret matematikk</li>
+        <li class="chip" tabindex="0" data-tip="FY1020 · NTNU">Mekanikk</li>
+        <li class="chip" tabindex="0" data-tip="TFY4030 · NTNU">Elektrisitet og magnetisme</li>
+        <li class="chip" tabindex="0" data-tip="TDT4100 · NTNU">Objektorientert programmering</li>
       </ul>
       <p class="muted foot-note">90 studiepoeng fullført ved NTNU.</p>
     </div>
@@ -328,9 +425,32 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   <section id="ferdigheter" aria-labelledby="fer-h">
     <p class="label" id="fer-h">Verktøy og språk</p>
     <div class="skillgrid">
-      <div><p class="sk">Programmering</p><ul class="chips"><li class="chip">Python</li><li class="chip">Java</li></ul></div>
-      <div><p class="sk">Analyse</p><ul class="chips"><li class="chip">Excel</li><li class="chip">PowerPoint</li></ul></div>
-      <div><p class="sk">Språk</p><ul class="chips"><li class="chip">Norsk <span class="lvl">· morsmål</span></li><li class="chip">Serbisk <span class="lvl">· morsmål</span></li><li class="chip">Engelsk <span class="lvl">· C2</span></li></ul></div>
+      <div><p class="sk">Programmering</p><ul class="chips"><li class="chip" tabindex="0" data-tip="Brukt i studiet ved NTNU">Python</li><li class="chip" tabindex="0" data-tip="TDT4100 · objektorientert">Java</li></ul></div>
+      <div><p class="sk">Analyse</p><ul class="chips"><li class="chip" tabindex="0">Excel</li><li class="chip" tabindex="0">PowerPoint</li></ul></div>
+      <div><p class="sk">Språk</p><ul class="chips"><li class="chip" tabindex="0">Norsk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0">Serbisk <span class="lvl">· morsmål</span></li><li class="chip" tabindex="0">Engelsk <span class="lvl">· C2</span></li></ul></div>
+    </div>
+  </section>
+
+  <section id="kontakt" aria-labelledby="kon-h">
+    <p class="label">Kontakt</p>
+    <div>
+      <h2 id="kon-h">Ta kontakt<span class="brace" aria-hidden="true">{</span></h2>
+      <p class="muted">Har du en sommerjobb, et prosjekt eller et spørsmål? Send meg en melding.</p>
+      <div class="contact">
+        <form class="form" id="kontaktskjema" novalidate>
+          <div class="field"><label for="k-epost">Din e-post</label><input id="k-epost" name="epost" type="email" autocomplete="email" placeholder="navn@firma.no" required></div>
+          <div class="field"><label for="k-emne">Emne</label><input id="k-emne" name="emne" type="text" placeholder="Sommerjobb 2027" required></div>
+          <div class="field"><label for="k-melding">Melding</label><textarea id="k-melding" name="melding" placeholder="Hei David …" required></textarea></div>
+          <button class="submit" type="submit">Send melding</button>
+          <p class="status" id="k-status" aria-live="polite"></p>
+        </form>
+        <ul class="links">
+          <li><a href="https://github.com/popovicdavid" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg><span class="txt">popovicdavid<span class="sub">GitHub</span></span></a></li>
+          <li><button type="button" id="kopier-epost"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg><span class="txt"><span id="epost-tekst">e-post</span><span class="sub" id="kopier-hint">Klikk for å kopiere</span></span></button></li>
+          <li><a href="https://www.linkedin.com/in/popovicdavid" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.83 2.67 4.83 6.13v5.43h-4v-4.82c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.9h-4v-11Z"/></svg><span class="txt">David Popovic<span class="sub">LinkedIn</span></span></a></li>
+        </ul>
+      </div>
+      <p class="brace-close" aria-hidden="true">}</p>
     </div>
   </section>
 </main>
@@ -429,6 +549,47 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   });
   hero.addEventListener('pointerleave', () => { mouse = null; });
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readTheme(); reduce ? still() : clear(); });
+})();
+
+// Lys som følger musa i kortene
+document.querySelectorAll('.area').forEach(el => {
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+});
+
+// Kontakt. Adressen settes sammen her så den ikke ligger i klartekst for spam-roboter.
+(() => {
+  const addr = ['davidpopo321', 'gmail.com'].join('@');
+  const label = document.getElementById('epost-tekst');
+  const hint = document.getElementById('kopier-hint');
+  const copyBtn = document.getElementById('kopier-epost');
+  label.textContent = addr;
+
+  async function copy() {
+    try { await navigator.clipboard.writeText(addr); hint.textContent = 'Kopiert ✓'; }
+    catch { getSelection().selectAllChildren(label); hint.textContent = 'Merket, trykk Cmd+C'; }
+    clearTimeout(copy.t); copy.t = setTimeout(() => { hint.textContent = 'Klikk for å kopiere'; }, 2200);
+  }
+  copyBtn.addEventListener('click', copy);
+
+  const form = document.getElementById('kontaktskjema');
+  const status = document.getElementById('k-status');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      const bad = form.querySelector(':invalid');
+      status.textContent = bad.type === 'email' && bad.value ? 'Sjekk at e-postadressen er riktig.' : 'Fyll ut alle feltene.';
+      bad.focus();
+      return;
+    }
+    const f = new FormData(form);
+    const body = `${f.get('melding')}\n\n– ${f.get('epost')}`;
+    location.href = `mailto:${addr}?subject=${encodeURIComponent(f.get('emne'))}&body=${encodeURIComponent(body)}`;
+    status.textContent = `E-postprogrammet ditt skal nå åpne seg med meldingen. Skjer det ikke, kan du sende den direkte til ${addr}.`;
+  });
 })();
 </script>
 </body>
