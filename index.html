@@ -152,6 +152,9 @@ p:last-child { margin-bottom: 0; }
 .area { background: var(--surface); padding: 22px 22px 24px; display: grid; gap: 8px; align-content: start; }
 .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
 .projects .area { padding: 24px 24px 22px; gap: 10px; }
+.project-link { text-decoration: none; color: inherit; }
+.project-link .arr { display: inline-block; font-family: var(--body); transition: transform .2s ease; }
+.project-link:hover .arr { transform: translate(3px, -3px); }
 .tags { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .tags li { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.04em; color: var(--accent-2); border: 1px solid color-mix(in srgb, var(--accent-2) 40%, transparent); padding: 6px 8px; border-radius: 6px; }
 .area h3 { font: 700 1.35rem/1.1 var(--display); margin: 0; letter-spacing: -0.02em; }
@@ -342,7 +345,7 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <p class="label">Om meg</p>
     <div>
       <h2 id="om-h">Fra datateknologi til fysmat</h2>
-      <p>Jeg studerer anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
+      <p>Jeg går tredje året på anvendt fysikk og matematikk ved NTNU. Jeg begynte på datateknologi i 2024, men byttet etter ett år fordi jeg ville ha mer matematikk og fysikk. Denne høsten er jeg på utveksling ved Pusan National University i Sør-Korea.</p>
       <p>Ved siden av studiet jobber jeg som mentor i matematikk og fysikk, og i fjor var jeg læringsassistent i Eksperter i team ved NTNU. På videregående var jeg elevrådsleder på Hamar katedralskole og satt i ungdomsrådet i Hamar kommune.</p>
       <p>Jeg er mest glad i den delen av matematikken som kan brukes til å ta beslutninger, som forventningsverdi og risiko. Drømmen er å bruke data og statistikk til å hjelpe bedrifter med å ta bedre valg om pris, markedsføring og salg.</p>
       <p>Jeg liker også å jobbe med folk. Som mentor og læringsassistent har jeg fått mye trening i å forklare vanskelige ting på en enkel måte.</p>
@@ -366,15 +369,15 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
     <p class="label" id="pro-h">Prosjekter</p>
     <div class="areas projects">
       <div class="area">
-        <h3>iOS-app med Screen Time</h3>
-        <p>Laget en app som bruker Apples Screen Time API, uten å ha jobbet med iOS-utvikling før.</p>
-        <ul class="tags"><li>iOS</li><li>Screen Time API</li></ul>
-      </div>
-      <div class="area">
         <h3>AI-assistert arbeidsflyt i Obsidian</h3>
-        <p>Et system der en AI-assistent holder orden på prosjektene og notatene mine. Denne nettsiden ble laget på samme måte.</p>
+        <p>Et system der en AI-assistent holder orden på prosjektene og notatene mine.</p>
         <ul class="tags"><li>AI</li><li>Obsidian</li></ul>
       </div>
+      <a class="area project-link" href="https://github.com/popovicdavid/popovicdavid.github.io" target="_blank" rel="noopener">
+        <h3>Denne nettsiden <span class="arr" aria-hidden="true">↗</span></h3>
+        <p>Feltet øverst er et system av differensiallikninger som regnes ut og tegnes i sanntid. Koden ligger åpent på GitHub.</p>
+        <ul class="tags"><li>HTML/CSS/JS</li><li>GitHub Pages</li></ul>
+      </a>
     </div>
   </section>
 
