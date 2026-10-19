@@ -180,6 +180,15 @@ p:last-child { margin-bottom: 0; }
 .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
 .projects .area { padding: 24px 24px 22px; gap: 10px; }
 .project-link { text-decoration: none; color: inherit; }
+.project-main { grid-column: 1 / -1; padding: 30px 28px 28px; gap: 14px; }
+.project-main .badge { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-2); }
+.project-main .lead { max-width: 70ch; }
+.feat { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; max-width: 74ch; }
+.feat li { padding-left: 18px; position: relative; color: var(--muted); line-height: 1.55; }
+.feat li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); }
+.feat b { color: var(--fg); font-weight: 600; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 6px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); list-style: none; font: 500 0.8rem/1.2 var(--mono); color: var(--muted); }
+.stats b { color: var(--accent); font-weight: 700; }
 .project-link .arr { display: inline-block; font-family: var(--body); transition: transform .2s ease; }
 .project-link:hover .arr { transform: translate(3px, -3px); }
 .tags { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -395,16 +404,30 @@ footer a:hover { color: var(--fg); text-decoration: underline; }
   <section id="prosjekter" aria-labelledby="pro-h">
     <p class="label" id="pro-h" data-i18n="projL">Prosjekter</p>
     <div class="areas projects">
+      <div class="area project-main">
+        <span class="badge" data-i18n="pmB">Hovedprosjekt</span>
+        <h3 data-i18n="pmH">LLM-wiki: agentisk kunnskapssystem</h3>
+        <p class="lead" data-i18n="pmP">Prosjektet jeg bruker mest tid på. Et Obsidian-vault der en AI-agent (Claude Code) leser kildene mine, skriver og vedlikeholder en strukturert wiki og holder alt konsistent. Basert på Andrej Karpathys LLM-wiki-idé.</p>
+        <ul class="feat">
+          <li data-i18n="pmL1"><b>Tre lag:</b> uforanderlige råkilder, en LLM-vedlikeholdt wiki i markdown (YAML-metadata og wikilenker) og et skjema, CLAUDE.md, som styrer agentens regler.</li>
+          <li data-i18n="pmL2"><b>Definerte arbeidsflyter:</b> ingest (leser kilden, skriver kildeside, oppdaterer tema- og personsider, indeks og logg, og committer til git), query (henter via indeksen) og lint (brutte lenker, foreldreløse sider, motsigelser og statussynk).</li>
+          <li data-i18n="pmL3"><b>Automatisering:</b> en øktstart-hook som gir agenten dagens kontekst, planlagte agenter (daglig Gmail-sjekk og ukentlig lint) og fire egne skills, blant annet en skrivepipeline med automatisk stilsjekk og en kontrollagent som godkjenner e-postutkast før sending.</li>
+          <li data-i18n="pmL4"><b>Personvern:</b> samtykkeregler før sensitiv informasjon lagres, rådata utenfor git og et lokalt repo uten remote.</li>
+          <li data-i18n="pmL5"><b>Brukes til:</b> søknadstekster i min egen stemme, statussporing og e-postkampanjer, utveksling og prosjektplanlegging.</li>
+        </ul>
+        <ul class="stats" data-i18n="pmS"><li><b>90</b> wikisider</li><li><b>31</b> kilder</li><li><b>149</b> commits</li><li><b>4</b> egne skills</li><li><b>2</b> planlagte agenter</li><li>daglig bruk siden okt. 2026</li></ul>
+        <ul class="tags"><li>LLM</li><li>Agentic workflows</li><li>Obsidian</li><li>Claude Code</li><li>Git</li></ul>
+      </div>
       <div class="area">
         <h3 data-i18n="p0h">Pokerbot</h3>
-        <p data-i18n="p0p">Lages i Python sammen med Felix. Min del av prosjektet er strategien og simulatoren: starthender vurderes med Chen-formelen, og vinnersjansen fra Monte Carlo-simulering sammenlignes med pot odds.</p>
-        <ul class="tags"><li>Python</li><li>Monte Carlo</li><li>Pot odds</li></ul>
+        <p data-i18n="p0p">Lages i Python sammen med Felix. Min del er beslutningslogikken og simulatoren: Monte Carlo-simulering estimerer vinnersjansen (equity), som sammenlignes med pot odds for å maksimere forventningsverdien. Hver ny versjon valideres mot en simulator over hundrevis av hender.</p>
+        <ul class="tags"><li>Python</li><li>Monte Carlo</li><li>Forventningsverdi</li></ul>
       </div>
-      <div class="area">
-        <h3 data-i18n="p1h">AI-assistert arbeidsflyt i Obsidian</h3>
-        <p data-i18n="p1p">Et system der en AI-assistent holder orden på prosjektene og notatene mine.</p>
-        <ul class="tags"><li>AI</li><li>Obsidian</li></ul>
-      </div>
+      <a class="area project-link" href="https://github.com/popovicdavid/notch-todo" target="_blank" rel="noopener">
+        <h3 data-i18n="p3h">NotchTodo <span class="arr" aria-hidden="true">↗</span></h3>
+        <p data-i18n="p3p">Native macOS-app i Swift som leser en markdown-fil med oppgaver og viser dem sortert etter frist i notchen. Jeg bruker den daglig.</p>
+        <ul class="tags"><li>Swift</li><li>macOS</li></ul>
+      </a>
       <a class="area project-link" href="https://github.com/popovicdavid/popovicdavid.github.io" target="_blank" rel="noopener">
         <h3 data-i18n="p2h">Denne nettsiden <span class="arr" aria-hidden="true">↗</span></h3>
         <p data-i18n="p2p">Feltet øverst er et system av differensiallikninger som regnes ut og tegnes i sanntid. Koden ligger åpent på GitHub.</p>
@@ -630,11 +653,20 @@ const I18N = {
     a3: '<h3>Analytics</h3><p>Digging into the numbers: profitability analysis and modeling in Excel and Python.</p>',
     projL: 'Projects',
     p0h: 'Poker bot',
-    p0p: 'Built in Python together with Felix. My part of the project is the strategy and the simulator: starting hands are scored with the Chen formula, and the win probability from Monte Carlo simulation is weighed against the pot odds.',
-    p1h: 'AI-assisted workflow in Obsidian',
-    p1p: 'A system where an AI assistant keeps my projects and notes organized.',
+    p0p: 'Built in Python together with Felix. My part is the decision logic and the simulator: Monte Carlo simulation estimates the win probability (equity), which is weighed against the pot odds to maximise expected value. Each new version is validated against a simulator over hundreds of hands.',
+    pmB: 'Main project',
+    pmH: 'LLM Wiki: agentic knowledge system',
+    pmP: 'The project I spend the most time on. An Obsidian vault where an AI agent (Claude Code) reads my sources, writes and maintains a structured wiki and keeps everything consistent. Based on Andrej Karpathy’s LLM wiki idea.',
+    pmS: '<li><b>90</b> wiki pages</li><li><b>31</b> sources</li><li><b>149</b> commits</li><li><b>4</b> custom skills</li><li><b>2</b> scheduled agents</li><li>daily use since Oct 2026</li>',
+    pmL1: '<b>Three layers:</b> immutable raw sources, an LLM-maintained markdown wiki (YAML metadata and wikilinks) and a schema, CLAUDE.md, that governs the agent’s rules.',
+    pmL2: '<b>Defined workflows:</b> ingest (reads the source, writes a source page, updates topic and person pages, index and log, and commits to git), query (retrieves through the index) and lint (broken links, orphan pages, contradictions and status sync).',
+    pmL3: '<b>Automation:</b> a session-start hook that gives the agent the day’s context, scheduled agents (daily inbox check and weekly lint) and four custom skills, including a writing pipeline with an automatic style check and a review agent that approves email drafts before sending.',
+    pmL4: '<b>Privacy:</b> consent rules before sensitive information is stored, raw data outside git and a local repo with no remote.',
+    pmL5: '<b>Used for:</b> application texts in my own voice, status tracking and email campaigns, exchange planning and project planning.',
     p2h: 'This website <span class="arr" aria-hidden="true">↗</span>',
     p2p: 'The field at the top is a system of differential equations, solved and drawn in real time. The code is open on GitHub.',
+    p3h: 'NotchTodo <span class="arr" aria-hidden="true">↗</span>',
+    p3p: 'Native macOS app in Swift that reads a markdown file of tasks and shows them sorted by deadline in the notch. I use it every day.',
     expL: 'Experience',
     d1: 'Aug&nbsp;2026&#8202;–&#8202;present',
     r1: 'Mathematics and Physics Mentor',
